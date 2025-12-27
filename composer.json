@@ -1,0 +1,17 @@
+{
+  "name": "al/wooqrph",
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "WooQRPh\\": "src/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  }
+}

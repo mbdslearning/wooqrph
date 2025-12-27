@@ -1,0 +1,68 @@
+.wooqrph-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 999999;
+  display: none;
+}
+
+.wooqrph-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.wooqrph-card {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 92%;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.2);
+}
+
+.wooqrph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.wooqrph-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.wooqrph-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.wooqrph-body {
+  text-align: center;
+}
+
+.wooqrph-qr {
+  margin: 16px auto;
+  width: 240px;
+  height: 240px;
+}
+
+.wooqrph-status {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+.wooqrph-actions {
+  margin-top: 16px;
+}
+
+.wooqrph-hidden {
+  display: none;
+}
