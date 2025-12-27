@@ -1,39 +1,86 @@
 <?php
 /**
  * Plugin Name: WooQRPh – PayMongo Dynamic QR Ph
- * Description: Modern, extensible WooCommerce payment gateway with Dynamic QR Ph (PayMongo).
+ * Description: Modern, extensible WooCommerce payment gateway for PayMongo Dynamic QR Ph.
  * Version: 0.1.0
- * Author: AL
- * Text Domain: wooqrph
- * Requires PHP: 8.1
- * Requires at least: 6.3
- * WC requires at least: 8.5
+ * Author: You
  */
 
 defined( 'ABSPATH' ) || exit;
 
+// -----------------------------------------------------------------------------
+// Autoloader
+// -----------------------------------------------------------------------------
+
 require_once __DIR__ . '/vendor/autoload.php';
 
-use WooQRPh\Core\Plugin;
-use WooQRPh\Core\Activator;
-use WooQRPh\Core\Deactivator;
+// -----------------------------------------------------------------------------
+// Core bootstrap
+// -----------------------------------------------------------------------------
 
-register_activation_hook( __FILE__, [ Activator::class, 'activate' ] );
-register_deactivation_hook( __FILE__, [ Deactivator::class, 'deactivate' ] );
+use WooQRPh\Core\Hooks;
+use WooQRPh\Core\Activator;
+
+// -----------------------------------------------------------------------------
+// Activation
+// -----------------------------------------------------------------------------
+
+register_activation_hook(
+    __FILE__,
+    [ Activator::class, 'activate' ]
+);
+
+// -----------------------------------------------------------------------------
+// Runtime configuration (AUTHORITATIVE LOCATION)
+// -----------------------------------------------------------------------------
+
+/**
+ * Determine PayMongo mode.
+ *
+ * true  = live mode (uses `li` signature)
+ * false = test mode (uses `te` signature)
+ */
+add_filter(
+    'wooqrph_is_live_mode',
+    static function (): bool {
+        return false; // CHANGE TO true IN PRODUCTION
+    }
+);
+
+/**
+ * PayMongo webhook secret key.
+ *
+ * IMPORTANT:
+ * - This is the webhook secret_key
+ * - NOT the API key
+ */
+add_filter(
+    'wooqrph_webhook_secret',
+    static function (): string {
+        return 'whsec_xxxxxxxxxxxxxxxxxxxxx';
+    }
+);
+
+/**
+ * Webhook timestamp tolerance (replay protection).
+ *
+ * Default: 300 seconds (5 minutes)
+ * Set to 0 to disable.
+ */
+add_filter(
+    'wooqrph_webhook_timestamp_tolerance',
+    static function (): int {
+        return 300;
+    }
+);
+
+// -----------------------------------------------------------------------------
+// Plugin initialization
+// -----------------------------------------------------------------------------
 
 add_action(
     'plugins_loaded',
-    static function () {
-        if ( ! class_exists( \WooCommerce::class ) ) {
-            return;
-        }
-
-        Plugin::instance()->boot();
-    },
-    0
+    static function (): void {
+        Hooks::register();
+    }
 );
-
-add_filter( 'wooqrph_is_live_mode', fn () => true );
-add_filter( 'wooqrph_webhook_secret', fn () => 'whsec_xxx' );
-add_filter( 'wooqrph_webhook_timestamp_tolerance', fn () => 300 );
-

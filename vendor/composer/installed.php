@@ -3,7 +3,7 @@
         'name' => 'al/wooqrph',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5c753ec58cff2831f4c9032491cfc1a92f76f7c8',
+        'reference' => '19d4f5031bb4fc3915ff91cc7a394aea8c86a515',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'al/wooqrph' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5c753ec58cff2831f4c9032491cfc1a92f76f7c8',
+            'reference' => '19d4f5031bb4fc3915ff91cc7a394aea8c86a515',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
