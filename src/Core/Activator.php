@@ -2,6 +2,8 @@
 
 namespace WooQRPh\Core;
 
+use WooQRPh\Infrastructure\Persistence\Schema;
+
 defined( 'ABSPATH' ) || exit;
 
 final class Activator {
